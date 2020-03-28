@@ -2,15 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Giphy Search API</title>
+    <title>Anna's Quik Type Challenge</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
     <link href="css/styles.css" rel="stylesheet">
   </head>
 
-  <body>
-    <div>
-
+  <body style="width:100%">
+    <div style=" width: 100%; display:flex; flex-direction:column; align-items:center">
+<h1>2020 Quick Type Challenge</h1>
+<h2>Are you up for it?</h2>
+<div id="box" style="border-style: ridge;
+  border-color: #8DD7CF;
+  border-width: 7px; width: 50%; text-align: center;">
+<p>type the following phrase in <span>X</span> seconds</p>
+<h3></h3>
+<input type="text" placeholder="type here...">
+<div id='status'>
+  <p>Time: <span>X</span> <br>
+  Score: <span>X</span></p>
+</div>
+<div id="instructions">
+  <p>Press "enter" to submit <br>
+Type each phrase into the box within the given amount of time. <br>
+To play again, type the current word and hit enter. </p>
+</div>
+</div>
     </div>
 
     <script
@@ -18,6 +35,6 @@
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"></script>
       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
