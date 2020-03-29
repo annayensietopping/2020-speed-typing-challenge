@@ -1,8 +1,15 @@
 
 $(function() {
-fetchWord()
+
 
 let newWord
+let time
+let score
+
+fetchWord()
+setTime()
+setScore()
+
 // hit "enter" function
 $(document).keypress(test)
 
@@ -13,6 +20,7 @@ function test(event) {
     console.log(newWord)
     evaluateInput(wordInput)
     fetchWord()
+    setInterval(countdown, 1000)
   }
 }
 // end
@@ -20,8 +28,10 @@ function test(event) {
 // evaluate input
 function evaluateInput(wordInput) {
   if(wordInput === newWord) {
+    addPoint()
     console.log('correct!')
   } else {
+    setScore()
     console.log('you fucked')
   }
 }
@@ -75,5 +85,43 @@ function clearInput() {
   $('input').val('')
 }
 // end
+
+// set time
+function setTime() {
+  time = 5
+  $('.time').html(time)
+}
+// end
+
+// set time
+function updateTime() {
+  $('.time').html(time)
+}
+// end
+
+// countdown timeer
+function countdown() {
+  if (time > 0) {
+    time--
+    console.log(time)
+    updateTime(time)
+  } else if (time === 0) {
+    console.log('gameover')
+    setScore()
+  }
+}
+// end
+
+// set score
+function setScore() {
+  score = 0
+  $('#score').html(score)
+}
+// end
+
+function addPoint() {
+  score++
+  $('#score').html(score)
+}
 
 })
