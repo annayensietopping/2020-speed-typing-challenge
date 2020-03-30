@@ -108,6 +108,8 @@ function countdown() {
   } else if (time === 0) {
     console.log('gameover')
     setScore()
+searchGif("you lose")
+// searchGif(query)
   }
 }
 // end
@@ -123,5 +125,39 @@ function addPoint() {
   score++
   $('#score').html(score)
 }
+
+// Giphy
+
+function searchGif(query) {
+    const giphyUrl = "https://api.giphy.com/v1/gifs/search"
+    const apiKey = "HRuknNTOGG0i1qVagcgOpKaxQz2OTAop"
+
+      // making API request using AJAX
+    $.ajax({
+      url: giphyUrl,
+      type: "GET",
+      data: { api_key: apiKey, q: query }
+    })
+    .done((response) => {
+      // execute this function if request is successful
+      // console.log(response.data)
+
+      // pass array of gifs as a parameter from API tp displayResults() function
+      // function is defined below outside of this event
+      displayResults(response.data)
+    })
+    .fail(() => {
+      // execute this function if request fails
+      alert('error occurred')
+    })
+  }
+// end search function
+
+// display results function
+function displayResults(response) {
+  let n = Math.floor(Math.random() * 26)
+      $('#reaction').html(`<img src="${response[n].images.original.url}"/>`)
+  }
+//
 
 })
