@@ -5,6 +5,7 @@ $(function() {
 let newWord
 let time
 let score
+let isPlaying
 
 fetchWord()
 setTime()
@@ -20,7 +21,7 @@ function test(event) {
     console.log(newWord)
     evaluateInput(wordInput)
     fetchWord()
-    setInterval(countdown, 1000)
+    let stopwatch = setInterval(countdown, 1000)
   }
 }
 // end
@@ -30,9 +31,11 @@ function evaluateInput(wordInput) {
   if(wordInput === newWord) {
     addPoint()
     console.log('correct!')
+    time = 5
   } else {
     setScore()
-    console.log('you fucked')
+    console.log('not a match')
+    searchGif("no")
   }
 }
 // end
@@ -107,12 +110,20 @@ function countdown() {
     updateTime(time)
   } else if (time === 0) {
     console.log('gameover')
-    setScore()
-searchGif("you lose")
-// searchGif(query)
+    playAgain()
+searchGif("time's up")
+isPlaying = false
   }
 }
 // end
+
+// check status
+function checkStatus() {
+  if (!isPlaying && time === 0)
+  clearInterval(stopwatch)
+}
+
+//
 
 // set score
 function setScore() {
@@ -125,6 +136,15 @@ function addPoint() {
   score++
   $('#score').html(score)
 }
+
+// play again?
+// adds button
+function playAgain() {
+  $('h3').html(`
+<button type="button" id ="playAgainButton" style= border:solid; margin:10px;" onClick="window.location.reload()">Play Again?</button> <br>
+    `)
+}
+// play again end
 
 // Giphy
 
