@@ -9,11 +9,32 @@ let isPlaying = true
 let stopwatch
 
 fetchWord()
-setTime()
 setScore()
 
 // hit "enter" function
 $(document).keypress(test)
+
+function startTimer() {
+  let time = 5
+  if (stopwatch != null) {
+    clearInterval(stopwatch);
+  }
+
+  stopwatch = setInterval(function countdown() {
+    renderTime(time)
+    if (time > 0) {
+      time--
+      console.log(time)
+    } else if (time === 0){
+      $('#resultText').html(`
+        <h3 style="font-weight: bold, margin: 10px">Oops too slow</h3>`
+        )
+      playAgain()
+      searchGif("gameover")
+      stopTime()
+    }
+  }, 1000);
+}
 
 function test(event) {
   if (event.keyCode === 13) { // if pressed enter
@@ -22,9 +43,9 @@ function test(event) {
     console.log(newWord)
     evaluateInput(wordInput)
     fetchWord()
-
-    stopwatch = setInterval(countdown, 1000)
-    setInterval(checkStatus,1000)
+if(isPlaying === true) {
+    startTimer();
+}
   }
 }
 // end
@@ -34,31 +55,14 @@ function evaluateInput(wordInput) {
   if(wordInput === newWord) {
     addPoint()
     console.log('correct!')
-    time = 6
   } else {
+    stopTime()
     console.log('not a match')
     $('#resultText').html(`
       <p style="font-weight: bold, margin: 10px"> <b> Not a Match</b></p>`)
     $('h3').css("visibility: hidden")
     searchGif("no")
     playAgain()
-
-    isPlaying = false
-  }
-}
-// end
-
-// countdown timeer
-function countdown() {
-  if (time > 0) {
-    time--
-    console.log(time)
-    updateTime(time)
-  } else if (time === 0) {
-    // console.log('gameover')
-    // $('h2').text("Oops too slow")
-    // playAgain()
-    // searchGif("gameover")
     isPlaying = false
   }
 }
@@ -68,13 +72,6 @@ function countdown() {
 function checkStatus() {
   if (isPlaying === false) {
   stopTime()
-} else if (time === 0) {
-  console.log('gameover')
-  $('#resultText').html(`
-    <h3 style="font-weight: bold, margin: 10px">Oops too slow</h3>`
-    )
-  playAgain()
-  searchGif("gameover")
 }}
 //
 
@@ -89,14 +86,7 @@ function clearInput() {
 // end
 
 // set time
-function setTime() {
-  time = 5
-  updateTime(time)
-}
-// end
-
-// set time
-function updateTime() {
+function renderTime(time) {
   $('.time').html(time)
 }
 // end
