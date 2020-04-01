@@ -37,9 +37,12 @@ function evaluateInput(wordInput) {
     time = 6
   } else {
     console.log('not a match')
-    $('h2').text("Not a Match")
+    $('#resultText').html(`
+      <p style="font-weight: bold, margin: 10px"> <b> Not a Match</b></p>`)
+    $('h3').css("visibility: hidden")
     searchGif("no")
     playAgain()
+
     isPlaying = false
   }
 }
@@ -67,7 +70,9 @@ function checkStatus() {
   stopTime()
 } else if (time === 0) {
   console.log('gameover')
-  $('h2').text("Oops too slow")
+  $('#resultText').html(`
+    <h3 style="font-weight: bold, margin: 10px">Oops too slow</h3>`
+    )
   playAgain()
   searchGif("gameover")
 }}
@@ -113,7 +118,7 @@ function addPoint() {
 // play again?
 // adds button
 function playAgain() {
-  $('h3').html(`
+  $('#action').html(`
 <button type="button" id ="playAgainButton" style= border:solid; margin:10px;" onClick="window.location.reload()">Play Again?</button> <br>
     `)
 }
@@ -149,7 +154,7 @@ function searchGif(query) {
 // display results function
 function displayResults(response) {
   let n = Math.floor(Math.random() * 26)
-      $('#reaction').html(`<img src="${response[n].images.original.url}"/>`)
+      $('#reaction').html(`<img src="${response[n].images.original.url}" max-width:50%;/>`)
   }
 //
 
