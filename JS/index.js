@@ -20,6 +20,10 @@ function startTimer() {
     clearInterval(stopwatch);
   }
 
+  $(document).click(() => {
+    console.log('test')
+  })
+
   stopwatch = setInterval(function countdown() {
     renderTime(time)
     if (time > 0) {
@@ -144,7 +148,7 @@ function searchGif(query) {
 // display results function
 function displayResults(response) {
   let n = Math.floor(Math.random() * 26)
-      $('#reaction').html(`<img src="${response[n].images.original.url}" max-width:50%;/>`)
+      $('#reaction').html(`<img src="${response[n].images.original.url}" width:50%;/>`)
   }
 //
 
