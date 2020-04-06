@@ -1,47 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Quick Type Challenge</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
 
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet" />
   </head>
 
   <body style="width:100%">
-    <div style=" width: 100%; display:flex; flex-direction:column; align-items:center">
-<h1>2020 Quick Type Challenge</h1>
-<h2>Are you up for it?</h2>
-<div id="box" class="mobile-gif" style="border-style: ridge;
+    <div
+      style=" width: 100%; display:flex; flex-direction:column; align-items:center"
+    >
+      <h1>2020 Quick Type Challenge</h1>
+      <h2>Are you up for it?</h2>
+      <div
+        id="box"
+        class="mobile-gif"
+        style="border-style: ridge;
   border-color: #8DD7CF;
-  border-width: 7px; width: 50%; text-align: center;">
-<p>type the following in <span class="setTime">5</span> seconds </p>
-<div id="resultText">
-<h3></h3>
+  border-width: 7px; width: 50%; text-align: center;"
+      >
+        <p>type the following in <span class="setTime">5</span> seconds</p>
+        <div id="resultText">
+          <h3></h3>
+        </div>
+        <!-- <button type="button" id ="playAgainButton" style="visibility:hidden; border:solid; margin:10px;">Play Again?</button> <br> -->
+        <div id="action">
+          <input id="main"
+            type="text"
+            placeholder="type here..."
+            style="border-style: solid"
+          />
+          <br />
+          <!-- <span style="font-size:14px;">*reminder: case sensitive*</span> -->
+        </div>
+        <div id="status">
+          <p>
+            Time: <span class="time"></span> <br />
+            Score: <span id="score"></span>
+          </p>
+          <div id="reaction"></div>
+        </div>
+        <div id="instructions">
+          <p>
+            Press "enter" to submit <br/>
+            Type each prompt into the box within the given amount of time <br>
+            this game is NOT meant for mobile devices, desktop only~
+          </p>
+        </div>
+      </div>
+
+<div id="high-score-box" style=" width: 50%; display:flex; flex-direction:column; align-items:center">
+
+
+
 </div>
-<!-- <button type="button" id ="playAgainButton" style="visibility:hidden; border:solid; margin:10px;">Play Again?</button> <br> -->
-<div id="action">
-<input type="text" placeholder="type here..." style="border-style: solid">
-<br>
-<span style="font-size:14px;">*reminder: case sensitive*</span>
-</div>
-<div id='status'>
-  <p>Time: <span class="time"></span> <br>
-  Score: <span id="score"></span></p>
-  <div id="reaction"></div>
-</div>
-<div id="instructions">
-  <p>Press "enter" to submit <br>
-Type each prompt into the box within the given amount of time</p>
-</div>
-</div>
+
     </div>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"></script>
-      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Add firebase libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-firestore.js"></script>
+    <!-- firebase libraries -->
     <script src="js/index.js"></script>
   </body>
 </html>

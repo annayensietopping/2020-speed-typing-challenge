@@ -1,12 +1,30 @@
 
 $(function() {
 
-
 let newWord
-let time
+let time = 5
 let score
 let isPlaying = true
 let stopwatch
+
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyCLYH5lOZLwPrtMmAFqDwLhl25guyLHBwU",
+    authDomain: "typing-high-scores.firebaseapp.com",
+    databaseURL: "https://typing-high-scores.firebaseio.com",
+    projectId: "typing-high-scores",
+    storageBucket: "typing-high-scores.appspot.com",
+    messagingSenderId: "934399843843",
+    appId: "1:934399843843:web:ffbb7f64914e6993347836",
+    measurementId: "G-GK292FGZN4"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const highScoreList = firebase.firestore().collection('highScores')
+  console.log(highScoreList)
+
+///
 
 fetchWord()
 setScore()
@@ -30,19 +48,22 @@ function startTimer() {
       time--
       console.log(time)
     } else if (time === 0){
+      isPlaying = false
       $('#resultText').html(`
         <h3 style="font-weight: bold, margin: 10px">Oops too slow</h3>`
         )
       playAgain()
       searchGif("gameover")
       stopTime()
+
+      // newHighScore()
     }
   }, 1000);
 }
 
 function test(event) {
   if (event.keyCode === 13) { // if pressed enter
-    let wordInput = $('input').val()
+    let wordInput = $('#main').val()
     console.log(wordInput)
     console.log(newWord)
     evaluateInput(wordInput)
@@ -67,7 +88,8 @@ function evaluateInput(wordInput) {
     $('h3').css("visibility: hidden")
     searchGif("no")
     playAgain()
-    isPlaying = false
+
+  // newHighScore()
   }
 }
 // end
@@ -85,7 +107,7 @@ function stopTime() {
 
 // clear input box
 function clearInput() {
-  $('input').val('')
+  $('#main').val('')
 }
 // end
 
@@ -104,6 +126,8 @@ function setScore() {
 }
 // end
 
+
+
 function addPoint() {
   score++
   $('#score').html(score)
@@ -117,6 +141,37 @@ function playAgain() {
     `)
 }
 // play again end
+
+// high scores
+
+
+function newHighScore() {
+  if (score > 2){
+  console.log('new high score')
+  $('#high-score-box').html(
+    `  <div id="high-score-prompt" style="border-style: ridge;
+    border-color: red; padding: 2em; margin-top: 15px;
+    border-width: 10px; text-align: center;">
+        <p><span style="font-size:24px;">high score! </span><br>
+        leave a message below: <br>
+        <input
+          type="text"
+          placeholder="your name"
+          style="border-style: solid; margin: 5px;"
+        /> <br>
+        <input
+          type="text"
+          placeholder="your message"
+          style="border-style: solid; margin: 5px;"
+        />
+      </p>
+      </div>`
+  )}
+}
+
+// high scores end
+
+
 
 // Giphy
 
