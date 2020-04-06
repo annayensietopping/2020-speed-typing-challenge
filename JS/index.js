@@ -88,7 +88,7 @@ function evaluateInput(wordInput) {
     $('h3').css("visibility: hidden")
     searchGif("no")
     playAgain()
-
+    isPlaying = false
   // newHighScore()
   }
 }
